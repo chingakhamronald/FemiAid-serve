@@ -5,6 +5,7 @@ const MedicalRouter = require("./app/medicals/router");
 const SchemeRouter = require("./app/schemes/router");
 const DoctorRouter = require("./app/doctors/router");
 const EmergencyRouter = require("./app/emergency/router");
+const Category = require("./app/category/router");
 
 admin.initializeApp({
   credential: admin.credential.cert(serviceAccount),
@@ -23,5 +24,6 @@ app.use("/api/medical", MedicalRouter);
 app.use("/api/scheme", SchemeRouter);
 app.use("/api/doctor", DoctorRouter);
 app.use("/api/emergency", EmergencyRouter);
+app.use("/api/category", Category);
 
 exports.app = onRequest(app);
