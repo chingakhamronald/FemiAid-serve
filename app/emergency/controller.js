@@ -5,24 +5,24 @@ const uuid = require("uuid");
 
 module.exports.Post = async (req, res) => {
   const db = admin.firestore();
-  const {priority1, priority2, priority3} = req.body;
+  const { priority1, priority2, priority3 } = req.body;
   const id = uuid.v4();
 
   try {
     if (!priority1 || !priority2 || !priority3) {
-      return res.status(400).json({error: "Missing required fields"});
+      return res.status(400).json({ error: "Missing required fields" });
     }
 
     await db
-        .collection("emergency")
-        .doc("/" + id + "/")
-        .create({
-          priority1: priority1,
-          priority2: priority2,
-          priority3: priority3,
-        });
+      .collection("emergency")
+      .doc("/" + id + "/")
+      .create({
+        priority1: priority1,
+        priority2: priority2,
+        priority3: priority3,
+      });
 
-    return res.status(200).json({message: "Item created successfully"});
+    return res.status(200).json({ message: "Item created successfully" });
   } catch (error) {
     console.log(error);
     return res.status(500).send(error);
@@ -62,7 +62,6 @@ module.exports.Update = async (req, res) => {
   const db = admin.firestore();
 
   const id = req.params.id;
-  console.log({"ID....": id});
 
   try {
     const document = db.collection("emergency").doc(id);
@@ -71,7 +70,7 @@ module.exports.Update = async (req, res) => {
       priority2: req.body.priority2,
       priority3: req.body.priority3,
     });
-    return res.status(200).json({message: "Successfully Updated"});
+    return res.status(200).json({ message: "Successfully Updated" });
   } catch (error) {
     console.log(error);
     return res.status(500).send(error);
